@@ -3,7 +3,7 @@ CXX=g++
 RM=rm # -f
 CPPFLAGS=-g
 LDFLAGS=-g 
-LDLIBS=-ltbb -ltcmalloc
+LDLIBS=-ltbb
 SRCS= Action.cpp card_utility.cpp GameTree.cpp\
     program.cpp TerminalNode.cpp ActionNode.cpp\
 	CfrTask.cpp Hand.cpp RangeManager.cpp Trainer.cpp\
