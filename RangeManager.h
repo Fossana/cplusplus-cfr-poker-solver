@@ -60,7 +60,7 @@ class RangeManager
 		vector<float> get_reach_probs(int player, uint8_t board[5], vector<float>& reachProbs);
 		vector<float> get_initial_reach_probs(int player);
 
-		int RangeManager::get_num_hands(int player, uint8_t board[5]);
+		int get_num_hands(int player, uint8_t board[5]);
 		vector<Hand>& get_starting_hands(int player);
 		unordered_map<int, vector<int>>& get_reach_probs_mappings(int player);
 		unordered_map<int, vector<Hand>>& get_ranges(int player);
