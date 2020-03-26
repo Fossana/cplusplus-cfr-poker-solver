@@ -26,10 +26,10 @@ class ActionNode : public Node
         void initialize_strategySum();
         void initialize_regretSum();
 		vector<float> get_average_strategy();
+		vector<float> get_average_strategy2();
         int get_child_count();
         Node* get_child(int index);
 		vector<float> get_current_strategy();
-		vector<float> get_current_strategy2();
         void update_regretSum_part_one(vector<float>& actionUtilities, int actionIndex);
         void update_regretSum_part_two(vector<float>& utilities, int iterationCount);
         void update_strategySum(vector<float>& strategy, vector<float>& reachProbs, int iterationCount);

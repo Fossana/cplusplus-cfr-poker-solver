@@ -22,7 +22,7 @@ tool: $(OBJS)
 depend: .depend
 
 .depend: $(SRCS)
-	@rm ./.depend
+	-rm ./.depend
 	$(CXX) $(CPPFLAGS) -MM $^>>./.depend;
 
 clean:
