@@ -70,8 +70,7 @@ void testTurn2()
 	trainer->train(root.get(), 200);
 }
 
-void testTurn3()
-{
+void testTurn3() {
 	string p1StartingHands = "AA,KK,QQ,JJ,TT,99,88,77,66,55,44,33,22,AK,AQ,AJ,AT,A9,A8,A7,A6,A5,A4,A3,A2,KQ,KJ,KT,K9,K8,K7,K6,K5,K4,K3,K2,QJ,QT,Q9,Q8,Q7,Q6,Q5,Q4,Q3,Q2,JT,J9,J8,J7,J6,J5,J4,J3,J2,T9,T8,T7,T6,T5,T4,T3,T2,98,97,96,95,94,93,92,87,86,85,84,83,82,76,75,74,73,72,65,64,63,62,54,53,52,43,42,32";
 	string p2StartingHands = "AA,KK,QQ,JJ,TT,99,88,77,66,55,44,33,22,AK,AQ,AJ,AT,A9,A8,A7,A6,A5,A4,A3,A2,KQ,KJ,KT,K9,K8,K7,K6,K5,K4,K3,K2,QJ,QT,Q9,Q8,Q7,Q6,Q5,Q4,Q3,Q2,JT,J9,J8,J7,J6,J5,J4,J3,J2,T9,T8,T7,T6,T5,T4,T3,T2,98,97,96,95,94,93,92,87,86,85,84,83,82,76,75,74,73,72,65,64,63,62,54,53,52,43,42,32";
 
@@ -122,6 +121,8 @@ void testTurn3()
 
 	unique_ptr<Trainer> trainer = make_unique<Trainer>(rangeManager, initialBoard, initialPotSize, inPositionPlayerId);
 	trainer->train(root.get(), 200);
+    cout << "----"<< std::endl;
+    gameTree->print_final_tree(root.get(),0);
 }
 
 void testRiver()
@@ -238,6 +239,8 @@ void testTurn()
 
 	unique_ptr<Trainer> trainer = make_unique<Trainer>(rangeManager, initialBoard, initialPotSize, inPositionPlayerId);
 	trainer->train(root.get(), 200);
+    cout << "----" << std::endl;
+	gameTree->print_final_tree(root.get(), 0);
 }
 
 void testFlop()
@@ -302,8 +305,8 @@ void testFlop()
 
 int main()
 {
-	testTurn();
-	getchar();
+	testTurn3();
+	//getchar();
 
     return 0;
 }

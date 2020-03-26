@@ -62,6 +62,18 @@ vector<float> ActionNode::get_average_strategy()
 		
 	return averageStrategy;
 }
+vector<float> ActionNode::get_average_strategy2() {
+       vector<float> res = vector<float>(numActions);
+    vector<float> as = this->get_average_strategy();
+    for (int action = 0; action < numActions; action++){
+        res[action]=0;
+        for (int hand = 0; hand < numHands; hand++){
+            res[action]+=as[hand+action*numHands];
+        }
+        res[action]=res[action]/numHands;
+    }
+       return res;
+}
 
 vector<float> ActionNode::get_current_strategy()
 {

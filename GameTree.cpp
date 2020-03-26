@@ -17,6 +17,79 @@ int allinNodeCount = 0;
 int showdownNodeCount = 0;
 int uncontestedNodeCount = 0;
 
+/* Print Tree with probabilities */
+void GameTree::print_final_tree(Node* node, int tabCount)
+{
+    if (node->type == NodeType::ACTION)
+    {
+        ActionNode* actionNode = static_cast<ActionNode*>(node);
+
+        auto actionIt = begin(actionNode->actions);
+        //vector<float> probs = actionNode->get_current_strategy();
+        vector<float> probs = actionNode->get_average_strategy2();
+        int k= 0;
+        if(tabCount == 0 ) {
+            cout<< "tree" <<std::endl;
+            cout<< "\tDEAL_FLOP" <<std::endl;
+            tabCount=2;
+        }
+        for (auto childIt = begin(actionNode->children); childIt != end(actionNode->children); childIt++)
+        {
+            Action* action = actionIt->get();
+            Node* child = childIt->get();
+
+            for (int i = 0; i < tabCount; i++)
+            cout << "\t";
+            //cout << "    ";
+
+            if (action->type == ActionType::FOLD)
+                cout << "p" << actionNode->player << ": FOLD";
+            else if (action->type == ActionType::CHECK)
+                cout << "p" << actionNode->player << ": CHECK";
+            else if (action->type == ActionType::CALL)
+                cout << "p" << actionNode->player << ": CALL " << action->amount << " ";
+            else if (action->type == ActionType::BET)
+                cout << "p" << actionNode->player << ": BET " << action->amount << " ";
+            if (action->type == ActionType::RAISE)
+                cout << "p" << actionNode->player << ": RAISE " << action->amount << " ";
+
+            cout << " - " << probs[k] << std::endl;
+
+            print_final_tree(child, tabCount+1);
+            actionIt++;
+            k++;
+        }
+    }
+    else if (node->type == NodeType::CHANCE)
+    {
+        for (int i = 0; i < tabCount; i++)
+            cout << "\t";
+
+        ChanceNode* chanceNode = static_cast<ChanceNode*>(node);
+        if (chanceNode->type == ChanceNodeType::DEAL_TURN)
+            cout << "DEAL_TURN\n";
+        else if (chanceNode->type == ChanceNodeType::DEAL_RIVER)
+            cout << "DEAL_RIVER\n";
+
+        print_final_tree(chanceNode->get_children().at(0)->node.get(), tabCount+1);
+    }
+    else
+    {
+        for (int i = 0; i < tabCount; i++)
+            cout << "\t";
+
+        TerminalNode* terminalNode = static_cast<TerminalNode*>(node);
+        if (terminalNode->type == TerminalNodeType::ALLIN)
+            cout << "ALLIN: ";
+        else if (terminalNode->type == TerminalNodeType::UNCONTESTED)
+            cout << "UNCONTESTED: ";
+        else if (terminalNode->type == TerminalNodeType::SHOWDOWN)
+            cout << "SHOWDOWN: ";
+        cout << "POT: " << terminalNode->value * 2 << " LAST_TO_ACT: p" << terminalNode->lastToAct << "\n";
+    }
+}
+
+
 GameTree::GameTree(unique_ptr<TreeBuildSettings> treeBuildSettings)
 {
     this->treeBuildSettings = move(treeBuildSettings);

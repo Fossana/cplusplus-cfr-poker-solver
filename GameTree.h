@@ -28,7 +28,7 @@ class GameTree {
     
     public:
         unique_ptr<TreeBuildSettings> treeBuildSettings;
-        
+        void print_final_tree(Node* root, int tabCount);
         void print_tree(Node* root, int tabCount);
         GameTree(unique_ptr<TreeBuildSettings> treeBuildSettings);
         unique_ptr<Node> build();

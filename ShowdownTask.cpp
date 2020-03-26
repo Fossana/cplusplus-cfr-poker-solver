@@ -1,5 +1,6 @@
 #include "ShowdownTask.h"
-
+#include <cstring>
+using std::memset;
 task* ShowdownTask::execute()
 {
 	vector<Hand>& heroHands = rangeManager->get_hands(hero, board);
